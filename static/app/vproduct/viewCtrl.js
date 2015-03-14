@@ -47,7 +47,7 @@ app.controller('viewCtrl', ['$scope','$routeParams','$rootScope','$location','mo
                     $location.path('/');
                 },
                 function (data) {
-                    alert(data);    // $scope.data.notes = data;
+                    alert(data);    
                 });
 	}
 }])
