@@ -1,0 +1,116 @@
+<deal-nav></deal-nav>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ product.name }}
+            	<small>
+            		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editProduct"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-danger" ng-click="delete()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                </small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Projects Row -->
+    <div class="row">
+        <div class="col-md-2 portfolio-item">
+            <a ng-href="#/product/{{product.id}}">
+                <img class="img-responsive" ng-src="http://placehold.it/190x243" alt="" ng-if="!product.url">
+                <img class="img-responsive" ng-src="{{product.url}}" alt="" ng-if="product.url">
+            </a>
+        </div>
+        <div class="col-md-10 portfolio-item">
+        	<h3>{{product.type}} Product</h3>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                <tr ng-repeat="variation in product.links">
+                    <td>{{variation.name}}</td>
+                    <td><a ng-href="{{variation.href}}">{{variation.href}}</a></td>
+                    <td>{{variation.price}}</td>
+                    <td>
+                    	<button type="button" class="btn btn-sm btn-danger" ng-click="deletelink(variation)"><span class="glyphicon glyphicon-trash" aria-hidden="true" ></span></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <deal-footer></deal-footer>
+    <!-- Modal -->
+	<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Edit Product</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form class="form-horizontal">
+			  <div class="form-group">
+			    <label for="productName" class="col-sm-3 control-label">Product Name</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="productName" placeholder="Product Name" ng-model="product.name">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="productName" class="col-sm-3 control-label">Product ImageUrl</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="productImageUrl" placeholder="Product Image Url" ng-model="product.url">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="productType" class="col-sm-3 control-label">Product Type</label>
+			    <div class="col-sm-9">
+					<select class="form-control" ng-model="correctlySelected"
+		                ng-options="opt as opt.label for opt in options" ng-change="update()">
+		            </select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<div class="col-sm-12">
+			  		<button type="button" class="btn btn-sm btn-info" ng-click="addvariation()">Add</button>
+			  	</div>
+			  </div>
+			  <div class="form-group">
+			  	<div class="col-sm-12">
+
+				  	<table class="table table-bordered">
+		                <tr>
+		                    <th>Name</th>
+		                    <th>Link</th>
+		                    <th>Price</th>
+		                    <th>Action</th>
+		                </tr>
+		                <tr ng-repeat="variation in product.links">
+		                    <td><input type="text" class="form-control" id="productName" placeholder="Product Name" ng-model="variation.name"></td>
+		                    <td><input type="text" class="form-control" id="producthref" placeholder="Product Link" ng-model="variation.href"></td>
+		                    <td><input type="text" class="form-control" id="productName" placeholder="Product price" ng-model="variation.price"></td>
+		                    <td>
+		                    	<button type="button" class="btn btn-sm btn-danger" ng-click="deletelink(variation)"><span class="glyphicon glyphicon-trash" aria-hidden="true" ></span></button>
+		                    </td>
+		                </tr>
+		            </table>
+	            </div>
+			  </div>
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" ng-click="edit()">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>

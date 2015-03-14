@@ -51,16 +51,40 @@ def read_data():
     line = get_data(url['product'])
     return json.dumps(json.loads(line,object_pairs_hook=collections.OrderedDict))
 
+@route('/edit',method='POST')
+def edit_data():
+    jsonObj = json.loads(json.dumps(request.json))
+    # print 'jsonObj', jsonObj
+    line = get_data(url['product'])
+    pyrecs = json.loads(line)
+    # print 'pyrecs', pyrecs
+    # pyrecs is an array (list) or recs[notes,title,id]
+    # We have to 'modify' the record whose id is: noteid
+    i = locate_rec(pyrecs,'id',jsonObj['id'])
+    print 'i=',i
+    if i >= 0:
+        pyrecs.pop(i);
+        pyrecs.append(jsonObj);
+        persist_data(pyrecs,url['product'])
+
+@route('/create',method='POST')
+def create_data():
+    jsonObj = json.loads(json.dumps(request.json))
+    # print 'jsonObj', jsonObj
+    line = get_data(url['product'])
+    pyrecs = json.loads(line)
+    pyrecs.append(jsonObj);
+    persist_data(pyrecs,url['product'])
+
 @route('/delete',method='POST')   
 def del_data():
     jsonObj = json.loads(json.dumps(request.json))
-    print 'key , value ', jsonObj['key'] ,jsonObj['value']
     line = get_data(url['product'])
     pyrecs = json.loads(line)
     print 'pyrecs', pyrecs
     # pyrecs is an array (list) or recs[notes,title,id]
     # We have to 'modify' the record whose id is: noteid
-    i = locate_rec(pyrecs,jsonObj['key'],jsonObj['value'])
+    i = locate_rec(pyrecs,'id',jsonObj['id'])
     if i > 0:
         pyrecs.pop(i);
         persist_data(pyrecs,url['product'])
