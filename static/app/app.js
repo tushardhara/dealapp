@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','firebase']);
 // configure our routes
 app.config(function($routeProvider) {
     $routeProvider
@@ -12,9 +12,3 @@ app.config(function($routeProvider) {
             controller  : 'viewCtrl'
         });
 });
-app.run(function($rootScope,$http,$q){
-	var get = $http({method: 'GET', url: '/read', cache: 'true'});
-	$q.all([get]).then(function(data){
-		$rootScope.products=data[0].data;
-	});
-})

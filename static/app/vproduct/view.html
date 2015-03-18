@@ -14,11 +14,11 @@
         </div>
     </div>
     <!-- /.row -->
-
+    {{title}}
     <!-- Projects Row -->
     <div class="row">
         <div class="col-md-2 portfolio-item">
-            <a ng-href="#/product/{{product.id}}">
+            <a ng-href="#/product/{{id}}">
                 <img class="img-responsive" ng-src="http://placehold.it/190x243" alt="" ng-if="!product.url">
                 <img class="img-responsive" ng-src="{{product.url}}" alt="" ng-if="product.url">
             </a>

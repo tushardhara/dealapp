@@ -24,12 +24,12 @@
 			    </div><!-- /input-group -->
 		  	</div><!-- /.col-lg-6 -->
             <div class="col-md-2 portfolio-item" style="margin-top:10px" ng-repeat="product in products | filter:searchText">
-                <a ng-href="#/product/{{product.id}}">
+                <a ng-href="#/product/{{product.$id}}">
                     <img class="img-responsive" ng-src="http://placehold.it/190x243" alt="" ng-if="!product.url">
                     <img class="img-responsive" ng-src="{{product.url}}" alt="" ng-if="product.url">
                 </a>
                 <h4 align="center">
-                    <a ng-href="#/product/{{product.id}}">{{product.name}}</a>
+                    <a ng-href="#/product/{{product.$id}}">{{product.name}}</a>
                 </h4>
             </div>
         </div>
